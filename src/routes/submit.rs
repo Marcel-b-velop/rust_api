@@ -2,7 +2,7 @@ use actix_web::{post, web, Responder, HttpResponse};
 use crate::state::KeyValueStore;
 use crate::models::{MyRequest, SubmitResponse};
 use std::sync::Mutex; // Mutex importieren
-use crate::lib::get_guid;
+use crate::utils::get_guid;
 
 #[utoipa::path(
     post,

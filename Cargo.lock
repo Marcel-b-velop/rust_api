@@ -659,6 +659,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bf151400ff0baff5465007dd2f3e717f3fe502074ca563069ce3a6629d07b289"
 
 [[package]]
+name = "hello"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "env_logger",
+ "log",
+ "serde",
+ "serde_json",
+ "tokio",
+ "utoipa",
+ "utoipa-swagger-ui",
+ "uuid",
+]
+
+[[package]]
 name = "http"
 version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1489,21 +1504,6 @@ name = "unicode-ident"
 version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "adb9e6ca4f869e1180728b7950e35922a7fc6397f7b641499e8f3ef06e50dc83"
-
-[[package]]
-name = "untitled"
-version = "0.1.0"
-dependencies = [
- "actix-web",
- "env_logger",
- "log",
- "serde",
- "serde_json",
- "tokio",
- "utoipa",
- "utoipa-swagger-ui",
- "uuid",
-]
 
 [[package]]
 name = "url"

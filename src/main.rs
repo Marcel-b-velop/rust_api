@@ -4,7 +4,8 @@ use utoipa_swagger_ui::{SwaggerUi};
 mod state;
 mod routes;
 mod models;
-pub mod lib;
+mod utils;
+
 use crate::models::{MyRequest, SubmitResponse, MyResponse};
 
 use state::KeyValueStore;
@@ -35,6 +36,7 @@ async fn main() -> std::io::Result<()> {
     // Zentraler Key-Value-Store
     let kv_store = web::Data::new(Mutex::new(KeyValueStore::new())); // Wrapping with web::Data
 
+    
     HttpServer::new(move || {
         App::new()
             .app_data(kv_store.clone()) // Shared AppState
