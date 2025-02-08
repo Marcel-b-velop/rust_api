@@ -1,7 +1,6 @@
 use actix_web::{get, web, HttpResponse};
 use crate::state::KeyValueStore;
 use std::sync::Mutex; // Mutex importieren
-use serde_json::json;
 
 
 #[utoipa::path(
@@ -16,11 +15,10 @@ pub async fn get_values(data: web::Data<Mutex<KeyValueStore>>) -> HttpResponse {
     // Zugriff auf die Daten sichern
     let store = data.lock().unwrap();
 
-    // Erstelle direkt eine JSON-Struktur aus der HashMap
-    let response = json!(store.inner_store);
+    // Hier nehmen wir an, dass `inner_store` etwas wie eine `HashMap<String, String>` ist
+    let response = &store.inner_store; // Bezieht sich auf die innere HashMap
 
-    // Gibt die JSON-Antwort zurück
+    // Gibt eine JSON-Antwort direkt aus der HashMap zurück
     HttpResponse::Ok()
-        .content_type("application/json")
-        .body(response.to_string())
+        .json(response) // Automatische Serialisierung in JSON
 }
