@@ -1,0 +1,14 @@
+[
+  {
+    "key": "abc",
+    "name": "Hallo",
+    "short_description": "ein Hallo Wert",
+    "preview": "https://picsum.photos/seed/picsum/300/200"
+  },
+  {
+    "key": "def",
+    "name": "Welt",
+    "short_description": "ein Welt Wert",
+    "preview": "https://picsum.photos/seed/picsum/300/200?grayscale"
+  }
+]

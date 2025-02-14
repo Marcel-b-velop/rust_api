@@ -1,3 +1,4 @@
+use crate::models::ListItem;
 use actix_web::{App, web, HttpServer};
 use utoipa::OpenApi;
 use utoipa_swagger_ui::{SwaggerUi};
@@ -11,7 +12,7 @@ mod routes;
 mod models;
 mod utils;
 
-use crate::models::{MyRequest, SubmitResponse, MyResponse};
+use crate::models::{MyRequest, SubmitResponse, MyResponse, read_list_item};
 
 use state::KeyValueStore;
 use routes::{submit, values};
@@ -19,8 +20,8 @@ use std::sync::Mutex;
 // Define an OpenAPI structure for your routes
 #[derive(OpenApi)] // Wichtig: OpenAPI-Definition der Endpunkte
 #[openapi(
-    paths(values::get_values, submit::submit_json), // Routen definieren
-    components(schemas(MyRequest, MyResponse, SubmitResponse)),
+    paths(values::get_values, submit::submit_json, list::get_items), // Routen definieren
+    components(schemas(MyRequest, MyResponse, SubmitResponse, ListItem)),
     tags(
         (name = "example", description = "Beispiel-API mit OpenAPI")
     )
@@ -28,6 +29,9 @@ use std::sync::Mutex;
 struct ApiDoc;
 
 use log::LevelFilter;
+use crate::routes::list;
+use std::env;
+
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -35,8 +39,12 @@ async fn main() -> std::io::Result<()> {
         env_logger::Builder::new()
             .filter_level(LevelFilter::Debug)
             .init();
+    let current_dir = env::current_dir().unwrap();
+    println!("Aktuelles Arbeitsverzeichnis: {:?}", current_dir);
 
-    // Zentraler Key-Value-Store
+    let stammdaten = read_list_item("/Users/marcel/RustroverProjects/untitled/src/resources/stammdaten.json");
+    let shared_data = web::Data::new(Mutex::new(stammdaten));
+
     // Zentraler Key-Value-Store
     let kv_store = web::Data::new(Mutex::new(KeyValueStore::new())); // Wrapping with web::Data
 
@@ -58,8 +66,10 @@ async fn main() -> std::io::Result<()> {
             .wrap(Logger::default()) // Logging-Middleware
             .wrap(cors) // CORS hinzufügen
             .app_data(kv_store.clone()) // Shared AppState
+            .app_data(shared_data.clone())
             .service(submit::submit_json) // POST /submit
             .service(values::get_values) // GET /values
+            .service(list::get_items)
             .service(    SwaggerUi::new("/swagger-ui/{_:.*}") // Neuer Swagger-UI-Endpunkt
                 .url("/api-docs/openapi.json", ApiDoc::openapi()))
     })
