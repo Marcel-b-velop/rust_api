@@ -42,7 +42,7 @@ async fn main() -> std::io::Result<()> {
     let current_dir = env::current_dir().unwrap();
     println!("Aktuelles Arbeitsverzeichnis: {:?}", current_dir);
 
-    let stammdaten = read_list_item("/Users/marcel/RustroverProjects/rust_api/src/resources/stammdaten.json");
+    let stammdaten = read_list_item("/Users/marcel/RustroverProjects/untitled/src/resources/stammdaten.json");
     let shared_data = web::Data::new(Mutex::new(stammdaten));
 
     // Zentraler Key-Value-Store

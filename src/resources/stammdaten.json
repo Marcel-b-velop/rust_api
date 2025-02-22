@@ -1,14 +1,16 @@
 [
   {
-    "key": "abc",
+    "key": "123e4567-e89b-12d3-a456-426614174001",
     "name": "T-Flex",
     "short_description": "Entdecke diesen coolen, beweglichen Dinosaurier, der komplett in einem Stück 3D-gedruckt wird! Das Modell besteht aus mehreren flexiblen Segmenten und lässt sich dadurch biegen und anpassen. Egal ob als ausgefallene Deko oder als lustiges Spielzeug – dieser Dino ist ein echter Hingucker. Auf Wunsch drucken wir ihn in zahlreichen Farben sowie in den Materialien PLA oder PETG. So erhältst du genau die Variante, die perfekt zu deinem Stil passt!",
-    "preview": "https://media.printables.com/media/prints/810979/images/6270231_9f02716a-356d-48c9-8260-9039c2ebe91e_c2d8a783-6518-4938-923a-dab6513c9ea3/thumbs/inside/1600x1200/webp/disaurus.webp"
+    "preview": "IMG_9690.png",
+    "price": 10
   },
   {
-    "key": "def",
-    "name": "Welt",
+    "key": "123e4567-e89b-12d3-a456-426614174000",
+    "name": "Manta Manta",
     "short_description": "ein Welt Wert",
-    "preview": "https://picsum.photos/seed/picsum/300/200?grayscale"
+    "preview": "IMG_9691.png",
+    "price": 8
   }
 ]
